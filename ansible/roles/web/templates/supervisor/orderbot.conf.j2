@@ -1,0 +1,8 @@
+[program:orderbot]
+directory={{ code_dir }}
+command={{ code_venv }}/bin/uwsgi uwsgi.ini
+user=orderbot
+autostart=True
+autorestart=True
+redirect_stderr=True
+stopsignal=QUIT

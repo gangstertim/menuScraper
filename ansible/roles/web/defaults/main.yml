@@ -1,0 +1,10 @@
+---
+git_repo: git@bitbucket.org:50onred/orderbot.git
+git_branch: master
+
+code_dir: /var/www/orderbot
+pip_requirements: "{{ code_dir }}/requirements.txt"
+code_venv: "{{ code_dir }}/venv"
+
+uwsgi_processes: 2
+uwsgi_port: 8080

@@ -1,0 +1,10 @@
+[uwsgi]
+master = true
+socket = :{{ uwsgi_port }}
+processes = {{ uwsgi_processes }}
+module = app
+callable = app
+chdir = {{ code_dir }}
+virtualenv = {{ code_venv }}
+uid = orderbot
+gid = orderbot

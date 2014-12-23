@@ -1,0 +1,6 @@
+---
+nginx_prefix: /etc/nginx
+nginx_sites_enabled: "{{ nginx_prefix }}/sites-enabled"
+
+supervisor_prefix: /etc/supervisor
+supervisor_confd: "{{ supervisor_prefix }}/conf.d"

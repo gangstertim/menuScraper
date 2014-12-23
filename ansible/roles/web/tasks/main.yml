@@ -1,0 +1,60 @@
+---
+- name: Install packages
+  apt: pkg={{ item }} state=present
+  with_items:
+      - nginx
+      - python-dev
+      - python-virtualenv
+      - redis-server
+      - supervisor
+
+- name: Remove default nginx site
+  file: path={{ nginx_sites_enabled }}/default state=absent
+  notify:
+    - Restart nginx
+
+- name: Adds orderbot to nginx
+  template: src=nginx/sites-enabled/orderbot.j2 dest={{ nginx_sites_enabled }}/orderbot
+  notify:
+    - Restart nginx
+
+- name: Upload canvas dashboard supervisor config
+  template: src=supervisor/orderbot.conf.j2 dest=/etc/supervisor/conf.d/orderbot.conf
+  notify:
+    - Restart orderbot
+
+- name: Add orderbot to supervisorctl
+  supervisorctl: name=orderbot state=present
+
+- name: Install git
+  apt: pkg=git state=present
+
+- name: Create code directory
+  file: path={{ code_dir }} owner=orderbot recurse=yes state=directory
+
+- name: Checkout code
+  sudo_user: orderbot
+  git: repo={{ git_repo }} version={{ git_branch }} dest={{ code_dir }}
+  notify:
+    - Restart orderbot
+
+- name: Install pip requirements
+  sudo_user: orderbot
+  pip: requirements={{ pip_requirements }} virtualenv={{ code_venv }}
+  notify:
+    - Restart orderbot
+
+- name: Upload uwsgi.ini
+  sudo_user: orderbot
+  template: src=uwsgi.ini.j2 dest="{{ code_dir }}/uwsgi.ini"
+  notify:
+    - Restart orderbot
+
+- name: Start redis
+  service: name=redis-server state=started
+
+- name: Start supervisor
+  service: name=supervisor state=started
+
+- name: Start nginx
+  service: name=nginx state=started

@@ -1,0 +1,29 @@
+---
+- name: Update the apt cache
+  apt: update_cache=yes cache_valid_time=3600
+
+- name: Install ntpd
+  apt: pkg=ntp state=present
+
+- name: Start ntpd
+  service: name=ntp state=started
+
+- name: Install htop
+  apt: pkg=htop state=present
+
+- name: Create the orderbot user
+  user: name=orderbot shell=/bin/bash state=present
+
+- name: Create ~/.ssh
+  sudo_user: orderbot
+  file: path=~/.ssh state=directory
+
+- name: Upload ssh key
+  sudo_user: orderbot
+  copy: src="ssh/{{ item.file }}" dest="~/.ssh/{{ item.file }}" mode={{ item.mode }}
+  with_items:
+      - {file: 'id_rsa', mode: '0400'}
+      - {file: 'id_rsa.pub', mode: '0600'}
+
+- name: Upload ssh known hosts
+  copy: src=ssh/known_hosts dest=/etc/ssh/ssh_known_hosts
