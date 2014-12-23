@@ -1,0 +1,21 @@
+[
+    ["Cavanaugh's", "Cavs", "Cav's", "Cavanaughs", "Cavanaugh's Restaurant", "Cavanaghs"],
+    ["Tiffin", "Tiffen"],
+    ["Mizu", "Mizus", "Misu"],
+    ["Fiesta Pizza", "Fiesta"],
+    ["Baby Blues BBQ", "Baby Blues", "Baby Blue's", "baby blue's bbq", "BBBBQ", "Blues", "Babies", "BBQ"],
+    ["A Mandarin Restaurant", "A Mandarin"],
+    ["Phoebe's Bar-B-Q", "Phoebe's BBQ", "Phoebes BBQ", "Feeby's","Phoebe's", "Pheobe's", "Phoebes", "Pheobes"],
+    ["Chicken Master"],
+    ["Pete's Famous Pizza", "Pete's", "Petes", "Pete's Pizza"],
+    ["Shaban Kabab and Curry", "Shaban", "Shaban Kabab"],
+    ["Al Zaytouna", "Zaytouna"],
+    ["Cafe V"],
+    ["Kabobeesh", "Kabobesh", "Kabbobesh", "Kabbobeesh"],
+    ["Rana", "Ranna"],
+    ["Rex Pizza", "Rex"],
+    ["Carnival Pizza", "Carnival"],
+    ["The Spot at Rittenhouse", "The Spot", "Spot"],
+    ["Ed's", "Eds", "Ed"],
+    ["Spiro's", "Spiros", "Spyros"]
+] 

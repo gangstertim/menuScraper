@@ -14,18 +14,15 @@ if __name__ == '__main__':
 
 @app.route('/', methods=['POST'])
 def index():
-    post = [s.strip() for s in request.form['text'].lower().strip().split(':', 2)]
-    user = request.form['user_name']
-    app.logger.info('Raw: {}\tPost: {}\tUser: {}'.format(request.form['text'], post, user))
-    orderbot_response = orderbot(user, post)
-    app.logger.info('Orderbot response: {}'.format(orderbot_response))
-    response = post_message(orderbot_response)
-    app.logger.info('Response to slack: {}'.format(response))
+    post = request.form['text']
+    app.logger.info('Raw: {}'.format(request.form['text']))
+    getmenu_response = GetMenu(post)
+    app.logger.info('GetMenu response: {}'.format(getmenu_response))
+    response = post_message(getmenu_response)
     return response
 
 def payload(text):
-    return {"channel": "#seamless-thursday",
-            "username": "OrderBot",
+    return {"username": "MenuBot",
             "text": text,
             "icon_emoji": ":fatbot:",
             'link_names': 1}
